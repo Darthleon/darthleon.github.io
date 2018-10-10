@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-color: darkblue;
+        }
+
+        h1 {
+            color: darkblue;
+            text-align: center;
+        }
+
+        p {
+            font-family: verdana;
+            font-size: 20px;
+        }
+    </style>
+    <script>
+        var Timeout;
+        var stringC;
+        window.onload = function (){           
+            startTimeout(2);            
+        };
+        function startTimeout(time)
+        {
+            console.log(time);
+            time= time *1000;
+            Timeout = setTimeout(function () {
+                Timeout = null;
+                timeoutEnd();
+            }, time);//todo
+        }
+
+        function timeoutEnd()
+        {
+            try
+            {
+                document.body.style.backgroundColor = colorPicker();
+                document.getElementById("h1").style.color = colorPicker();
+                document.getElementById("p").style.color = colorPicker();
+                restartTimeout();
+            }
+            catch (ea)
+            {
+                console.log("ea")
+                restartTimeout();
+            }
+        }
+
+        function restartTimeout()
+        {
+            var time = mathFunction() / 4;
+            startTimeout(time);
+        }
+        function colorPicker()
+        {
+            var bodyColor = mathFunction();
+
+            switch (bodyColor)
+            {
+                case 1:
+                    bodyColor = "Chocolate";
+                    break;
+                case 2:
+                    bodyColor = "DarkGoldenrod";
+                    break;
+                case 3:
+                    bodyColor = "pink";
+                    break;
+                case 4:
+                    bodyColor = "red";
+                    break;
+                case 5:
+                    bodyColor = "HotPink";
+                    break;
+                case 6:
+                    bodyColor = "PeachPuff";
+                    break;
+                case 7:
+                    bodyColor = "Chartreuse";
+                    break;
+                case 8:
+                    bodyColor = "LightSteelBlue";
+                    break;
+                default:
+                    bodyColor = getRandomColor();
+                    console.log(bodyColor);
+                    stringC= stringC+" "+bodyColor;
+                    console.log(stringC);
+                    break;
+            }
+            return bodyColor;
+        }
+
+        function mathFunction()
+        {
+            var x = Math.floor((Math.random() * 10) + 1);
+            return x;
+        }
+
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+    </script>
+</head>
+<body>
+
+<h1 id="h1">My First CSS Example</h1>
+<p id="p">This is a paragraph.</p>
+
+</body>
+</html>
