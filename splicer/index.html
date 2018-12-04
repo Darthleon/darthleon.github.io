@@ -8,7 +8,7 @@
             var spliceX = document.getElementById("spliceX").value;
             var spliceY = document.getElementById("spliceY").value;
             var res = str.slice(spliceX,spliceY);
-            console.log(str, spliceX, spliceY, res);
+            
             document.getElementById("resultSplice").value = res;
         }
 
@@ -17,8 +17,8 @@
             var str = document.getElementById("text").value;
             var search = document.getElementById("cutter").value;
             var length = search.length;
-            var res = str.search(search);
-            console.log(str, spliceX, spliceY, res);
+            var res = str.lower().search(search.lower());
+            
             document.getElementById("resultCut").value ="splice("+ res+','+(res+length)+")";
         }
 
@@ -44,12 +44,7 @@ Save from string:</br>
 </br>
 <input type="text" id="resultCut"/></br></br></br>
 
-Save from string:</br>
-<input type="text" id="cutter" /></br>
 
-<input type='button' onclick="cutter()" value="Save">
-</br>
-<input type="text" id="resultCut"/></br></br></br>
 
 </body>
 </html>
