@@ -17,7 +17,7 @@
             var str = document.getElementById("text").value;
             var search = document.getElementById("cutter").value;
             var length = search.length;
-            var res = str.lower().search(search.lower());
+            var res = str.search(search);
             
             document.getElementById("resultCut").value ="splice("+ res+','+(res+length)+")";
         }
