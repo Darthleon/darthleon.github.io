@@ -8,7 +8,7 @@
             var spliceX = document.getElementById("spliceX").value;
             var spliceY = document.getElementById("spliceY").value;
             var res = str.slice(spliceX,spliceY);
-            
+
             document.getElementById("resultSplice").value = res;
         }
 
@@ -18,11 +18,19 @@
             var search = document.getElementById("cutter").value;
             var length = search.length;
             var res = str.search(search);
-            
+
             document.getElementById("resultCut").value ="splice("+ res+','+(res+length)+")";
         }
+        
+        function ender()
+        {
+            var str = document.getElementById("text").value;
+            var search = document.getElementById("removeFromEnd").value;
+            var length = search.length;
+            document.getElementById("resultEnd").value ="splice(0,-"+(length)+")";
+        }
 
-
+       
     </script>
 </head>
 <body>
@@ -40,10 +48,16 @@ string.splice(<input type="text" id="spliceX" style="width:50px"/>,<input type="
 Save from string:</br>
 <input type="text" id="cutter" /></br>
 
-<input type='button' onclick="cutter()" value="Save">
+<input type='button' onclick="cutter()" value="Remove">
 </br>
 <input type="text" id="resultCut"/></br></br></br>
 
+Remove from End:</br>
+<input type="text" id="removeFromEnd" /></br>
+
+<input type='button' onclick="ender()" value="Save">
+</br>
+<input type="text" id="resultEnd"/></br></br></br>
 
 
 </body>
