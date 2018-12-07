@@ -2,14 +2,14 @@
 <html>
 <head>
     <script>
-        function splicer()
+        function slicer()
         {
             var str = document.getElementById("text").value;
-            var spliceX = document.getElementById("spliceX").value;
-            var spliceY = document.getElementById("spliceY").value;
-            var res = str.slice(spliceX,spliceY);
+            var sliceX = document.getElementById("sliceX").value;
+            var sliceY = document.getElementById("sliceY").value;
+            var res = str.slice(sliceX,sliceY);
 
-            document.getElementById("resultSplice").value = res;
+            document.getElementById("resultSlice").value = res;
         }
 
         function cutter()
@@ -19,7 +19,7 @@
             var length = search.length;
             var res = str.search(search);
 
-            document.getElementById("resultCut").value ="splice("+ res+','+(res+length)+")";
+            document.getElementById("resultCut").value ="slice("+ res+','+(res+length)+")";
         }
         
         function ender()
@@ -27,7 +27,7 @@
             var str = document.getElementById("text").value;
             var search = document.getElementById("removeFromEnd").value;
             var length = search.length;
-            document.getElementById("resultEnd").value ="splice(0,-"+(length)+")";
+            document.getElementById("resultEnd").value ="slice(0,-"+(length)+")";
         }
 
        
@@ -38,12 +38,12 @@ String:</br>
 <input type="text" id="text"/></br></br></br>
 
 
-Splice from string:</br>
-string.splice(<input type="text" id="spliceX" style="width:50px"/>,<input type="text" id="spliceY" style="width:50px"/>)</br>
+Slice from string:</br>
+string.slice(<input type="text" id="sliceX" style="width:50px"/>,<input type="text" id="sliceY" style="width:50px"/>)</br>
 
-<input type='button' onclick="splicer()" value="Splice">
+<input type='button' onclick="slicer()" value="Slice">
 </br>
-<input type="text" id="resultSplice"/></br></br></br>
+<input type="text" id="resultSlice"/></br></br></br>
 
 Save from string:</br>
 <input type="text" id="cutter" /></br>
