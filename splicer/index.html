@@ -7,7 +7,15 @@
             var str = document.getElementById("text").value;
             var sliceX = document.getElementById("sliceX").value;
             var sliceY = document.getElementById("sliceY").value;
-            var res = str.slice(sliceX,sliceY);
+            if (sliceY!= undefined)
+            {                
+                var res = str.slice(sliceX,sliceY);
+            }
+            else
+            {
+                console.log(sliceY);
+                var res = str.slice(sliceX,sliceY);
+            }
 
             document.getElementById("resultSlice").value = res;
         }
@@ -39,7 +47,7 @@ String:</br>
 
 
 Slice from string:</br>
-string.slice(<input type="text" id="sliceX" style="width:50px"/>,<input type="text" id="sliceY" style="width:50px"/>)</br>
+string.slice(<input type="text" id="sliceX" style="width:50px"/>,<input type="text" id="sliceY" style="width:50px"/>) (the second number is optional)</br>
 
 <input type='button' onclick="slicer()" value="Slice">
 </br>
