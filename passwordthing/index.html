@@ -17,86 +17,92 @@
     </style>
 </head>
 <body>
-    <h1>4-Digit Combinations Generator</h1>
-    <p>Enter 1-4 numbers (e.g., 0,7,8) separated by commas:</p>
-    <div>
-        <input type="text" id="inputNumbers" placeholder="Enter numbers">
-        <button onclick="generateCombinations()">Generate Combinations</button>
-    </div>
-    <h2>Generated Combinations:</h2>
-    <div id="combinationsList"></div>
+<h1>4-Digit Combinations Generator</h1>
+<p>Enter 1-4 numbers (e.g., 0,7,8) separated by commas:</p>
+<div>
+    <input type="text" id="inputNumbers" placeholder="Enter numbers">
+    <button onclick="generateCombinations()">Generate Combinations</button>
+</div>
+<h2>Generated Combinations:</h2>
+<div id="totalCombinations"></div>
+<div id="combinationsList"></div>
 
-    <script>
-        function generateCombinations() {
-            const inputNumbers = document.getElementById("inputNumbers").value;
-            const numbersArray = inputNumbers.split(",").map(Number);
+<script>
+    function generateCombinations() {
+        var inputNumbers = document.getElementById("inputNumbers").value;
+        inputNumbers = inputNumbers.replace(/\./g, ",");
+        const numbersArray = inputNumbers.split(',').map(Number);
 
-            const combinations = [];
+        const combinations = [];
 
-            function generateHelper(currentCombination, remainingNumbers) {
-                if (currentCombination.length === 4) {
-                    combinations.push(currentCombination.slice());
-                    return;
-                }
-
-                for (let i = 0; i < remainingNumbers.length; i++) {
-                    const newCombination = currentCombination.slice();
-                    newCombination.push(remainingNumbers[i]);
-
-                    // Recursively generate combinations
-                    generateHelper(newCombination, remainingNumbers);
-                }
+        function generateHelper(currentCombination, remainingNumbers) {
+            if (currentCombination.length === 4) {
+                combinations.push(currentCombination.slice());
+                return;
             }
 
-            generateHelper([], numbersArray);
+            for (let i = 0; i < remainingNumbers.length; i++) {
+                const newCombination = currentCombination.slice();
+                newCombination.push(remainingNumbers[i]);
 
-            // Filter combinations to include only those with all given numbers
-            const filteredCombinations = combinations.filter(combination => {
-                return numbersArray.every(num => combination.includes(num));
-            });
-
-            const combinationsList = document.getElementById("combinationsList");
-            combinationsList.innerHTML = "";
-
-            // Create columns for each first digit
-            const columns = {};
-
-            filteredCombinations.forEach(combination => {
-                const firstDigit = combination[0];
-                if (!columns[firstDigit]) {
-                    columns[firstDigit] = [];
-                }
-                columns[firstDigit].push(combination);
-            });
-
-            // Display combinations in columns
-            for (const firstDigit in columns) {
-                if (columns.hasOwnProperty(firstDigit)) {
-                    const column = document.createElement("div");
-                    column.classList.add("combinationsColumn");
-                    column.innerHTML = `<h3>Starting with ${firstDigit}</h3>`;
-
-                    columns[firstDigit].forEach(combination => {
-                        const listItem = document.createElement("li");
-                        const label = document.createElement("label");
-                        const checkbox = document.createElement("input");
-                        checkbox.type = "checkbox";
-                        label.appendChild(checkbox);
-                        label.appendChild(document.createTextNode(combination.join("")));
-                        listItem.appendChild(label);
-                        column.appendChild(listItem);
-                    });
-
-                    combinationsList.appendChild(column);
-                }
+                // Recursively generate combinations
+                generateHelper(newCombination, remainingNumbers);
             }
-
-            // Add checkmarks by each number
-            const inputNumbersDiv = document.querySelector("div");
-            inputNumbersDiv.innerHTML = numbersArray.map(num => {
-                return `<span class="selected">${num}</span>`;
-            }).join(", ");
         }
-    </script>
+
+        generateHelper([], numbersArray);
+
+        // Filter combinations to include only those with all given numbers
+        const filteredCombinations = combinations.filter(combination => {
+            return numbersArray.every(num => combination.includes(num));
+        });
+
+        const combinationsList = document.getElementById("combinationsList");
+        combinationsList.innerHTML = "";
+
+        // Create columns for each first digit
+        const columns = {};
+        var total = filteredCombinations.length
+        const totalCombinations = document.getElementById("totalCombinations");
+        totalCombinations.innerHTML = "Total: " + total;
+
+        filteredCombinations.forEach(combination => {
+            const firstDigit = combination[0];
+            if (!columns[firstDigit]) {
+                columns[firstDigit] = [];
+            }
+            columns[firstDigit].push(combination);
+        });
+
+        // Display combinations in columns
+        for (const firstDigit in columns) {
+            if (columns.hasOwnProperty(firstDigit)) {
+                const column = document.createElement("div");
+                column.classList.add("combinationsColumn");
+                column.innerHTML = `<h3>Starting with ${firstDigit}</h3> Total: `+columns[firstDigit].length;
+
+
+                columns[firstDigit].forEach(combination => {
+                    const listItem = document.createElement("li");
+                    const label = document.createElement("label");
+                    const checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    label.appendChild(checkbox);
+                    label.appendChild(document.createTextNode(combination.join("")));
+                    listItem.appendChild(label);
+                    column.appendChild(listItem);
+                });
+
+                combinationsList.appendChild(column);
+            }
+        }
+
+        // Add checkmarks by each number
+        const inputNumbersDiv = document.querySelector("div");
+        inputNumbersDiv.innerHTML = numbersArray.map(num => {
+            return `<span class="selected">${num}</span>`;
+        }).join(", ");
+    }
+</script>
 </body>
 </html>
